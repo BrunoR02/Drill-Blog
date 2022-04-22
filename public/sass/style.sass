@@ -1,0 +1,113 @@
+@import 'variables'
+@import 'reset'
+@import 'grid'
+@import 'header'
+@import 'radio'
+@import 'home'
+@import 'form'
+@import 'post'
+@import 'list'
+@import 'footer'
+
+@keyframes rotateTitle
+    0%
+        transform: rotate(0deg)
+    25%
+        transform: rotate(7deg)
+    50%
+        transform: rotate(0deg)
+    75%
+        transform: rotate(-7deg)
+    100%
+        transform: rotate(0deg)
+
+
+body
+    background: $bgGradient
+    position: relative
+    height: 100vh
+    scroll-behavior: smooth
+
+p, h2,h3,h4,h5,li
+    font-family: 'Oswald', sans-serif
+
+p
+    color: $textcolor
+    display: block
+    text-overflow: ellipsis
+    margin-block-start: 0px
+    margin-block-end: 0px
+em
+    color: #a70000
+
+.title-1   
+    width: 50%
+    margin:
+        bottom: 50px
+        top: 70px
+        left: auto
+        right: auto
+    font-size: 3em
+    text-align: center
+    color: $headerbg
+    transition: 0.3s
+    z-index: -1
+    &:hover
+        animation-name: rotateTitle
+        animation-duration: 0.3s
+        animation-timing-function: linear
+
+@media (max-width: 768px)
+    .title-1
+        font-size: 2em
+        margin:
+            top: 50px
+            bottom: 30px
+
+
+.post-title
+    transition: 0.3s
+    &:hover
+        animation-name: rotateTitle
+        animation-duration: 0.3s
+        animation-timing-function: linear
+
+.alert
+    position: absolute
+    z-index: 1
+    margin-top: 10px
+    padding: 15px   
+    color: white
+    border-radius: 15px
+    &-error
+        background-color: #a70000
+        border: 1px solid #a70000
+    &-success
+        background-color: $bg2
+        border: 1px solid $textcolor
+    &-close
+        content: ''
+        display: table
+        position: absolute
+        top: 30%
+        right: 20px
+        width: 15px
+        height: 15px
+        background: url("/img/icons/letra-x.png"), transparent
+        background:
+            size: contain
+            repeat: no-repeat
+            position: center
+        border: none
+        &:hover
+            background-color: transparent
+
+.content
+    padding-bottom: 50px
+
+@media (max-width: 768px)
+    .alert
+        font-size: 0.8em
+        
+
+

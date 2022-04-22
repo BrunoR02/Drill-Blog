@@ -1,0 +1,49 @@
+<div class="content">
+    <div class="container">
+        {{#if errors}}
+            <div class="alert alert-error grid-12">{{errors.texto}}
+                <button class="alert-close" onclick="this.parentElement.style.display = 'none'"></button>
+            </div>
+
+        {{else}}
+        {{/if}}
+    </div>
+
+    <div class="container">
+        <div class="post grid-12">
+            <h3 class="post-title">{{post.title}}</h3>
+            <div onmouseleave="this.style.boxShadow = 'none'" 
+            onmouseenter="this.style.boxShadow = 'inset 0 0 0 1000px #03045E23'" 
+            class="post-image" style="background-image: url('/img/{{post.filename}}')"></div>
+            <h4 class="post-desc">{{post.desc}}</h4>
+            <pre class="post-content">{{post.content}}</pre>
+
+        </div>
+        <div class="comments">
+            <h4 class="comments-title">Comentários:</h4>
+            {{#each comments}}
+                <div class="comment">
+                    <h4 class="comment-author">{{usuario.name}}</h4>
+                    <p class="comment-content">{{content}}</p>
+                    {{#ifEqual usuario.name ../user.name}}
+                        <form class="comment-delete delete-post" action="/post/comment/delete" method="post">
+                            <input type="hidden" name="id" value="{{_id}}">
+                            <button type="submit"></button>
+                        </form>
+                    {{else}}
+                    {{/ifEqual}}
+                </div>
+            {{/each}}
+            {{#if user}}
+                <form id='comment-post' class="comments-form" action="/post/{{post.slug}}/sent" method="post">
+                    <label for="content">Gostou? Deixe sua opinião:</label>
+                    <textarea id="comment-text" type="text" name="content" required></textarea>
+                    <button type="submit">Enviar</button>
+                </form>
+            {{else}}
+                <p id="msg-logado" style="margin-top:20px">Esteja logado para comentar</p>
+            {{/if}}
+        </div>
+
+    </div>
+</div>

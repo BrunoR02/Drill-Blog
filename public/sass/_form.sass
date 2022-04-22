@@ -1,0 +1,80 @@
+
+.button-link
+    display: flex
+    justify-content: center
+    margin-bottom: 20px
+    
+button
+    position: relative
+    padding: 10px 20px
+    font-size: 1em
+    font-weight: bold
+    border: none
+    border-radius: 20px
+    background-color: $headerbg
+    color: white
+    cursor: pointer
+    transition: 0.3s
+    &:hover
+        background-color: $bg2
+
+.button-delete
+    background-color: #a70000
+    &:hover
+        background-color: red
+
+.form
+    display: flex
+    flex-direction: column
+    justify-content: center
+    align-items: center
+    margin-bottom: 100px
+    label,input,textarea
+        flex: 1
+        width: 30%
+        margin: 10px 0
+    label
+        text-align: left
+        padding-left: 10px
+        font:
+            size: 1.25em
+            weight: bold
+        color: $textcolor
+    input, textarea
+        padding: 10px 20px
+        border: 1px solid $textcolor
+        border-radius: 20px
+        background-color: transparent
+        transition: background-color 0.5s
+        color: #a70000
+        font-weight: bold
+        &:focus
+            background-color: $bg2
+            outline: none
+    input[type="file"]
+        border: none
+    textarea[name="desc"]
+        flex: 0 1 auto
+        max-height: 100px
+        min-height: 100px
+    textarea
+        flex: 0 1 auto
+        resize: none
+        min-height: 200px
+    &-image
+        background:
+            size: cover
+            position: center 
+        width: 300px
+        height: 300px
+
+.form-button
+    margin-top: 20px
+    
+
+@media (max-width: 768px)
+    .form
+        label, input, textarea
+            width: 80%
+        label
+            font-size: 1em

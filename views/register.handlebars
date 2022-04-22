@@ -1,0 +1,23 @@
+<div class="content">
+    <div class="container">
+        {{#if errors}}
+            <div class="alert alert-error grid-12">{{errors.texto}}
+                <button class="alert-close" onclick="this.parentElement.style.display = 'none'"></button>
+            </div>
+        {{else}}
+        {{/if}}
+    </div>
+    <h3 class="title-1">Cadastre-se:</h3>
+    <form id="register-post" class="form" action="/register" method="post">
+        <label for="name">Nome: <em>*</em></label>
+        <input type="text" name="name" id="name" required>
+        <label for="email">Email: <em>*</em></label>
+        <input type="email" name="email" id="email" required>
+        <label for="password">Senha: <em>*</em></label>
+        <input type="password" name="password" id="password" required>
+        <label for="password2">Confirme a Senha: <em>*</em></label>
+        <input type="password" name="password2" id="password2" required>
+
+        <button class="form-button" type="submit">Cadastrar</button>
+    </form>
+</div>

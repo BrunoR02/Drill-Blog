@@ -1,0 +1,140 @@
+@keyframes jump
+    0%
+        transform: translateY(0%)
+    50%
+        transform: translateY(-10%)
+    100%
+        transform: translateY(0%)
+        
+.header
+    display: flex
+    flex-direction: row
+    justify-content: space-between
+    &-title
+        width: 280px
+        margin-left: 50px
+        cursor: default
+        align-self: center
+        h2
+            cursor: pointer
+            width: 120px
+            padding: 20px
+            font-size: 3em
+            color: $textcolor
+            transition: 0.3s
+            &:hover
+                color: white
+                animation-name: jump
+                animation-duration: 0.7s
+                animation-timing-function: ease
+            
+    &-menu
+        display: flex
+        width: 280px
+        align-items: center
+        margin-right: 50px
+        transition: 0.7s ease
+        li
+            padding: 0px 20px 0px 10px
+            color: $textcolor
+            font-size: 1.25em
+            font-weight: bold
+            transition: 0.3s
+            &:hover
+                color: white
+                animation-name: jump
+                animation-duration: 0.7s
+                animation-timing-function: ease
+
+.hamburguer-menu
+    height: 100%
+    width: 120px
+    align-self: center
+    display: flex
+    justify-content: flex-end
+    display: none
+
+.hamburguer-lines
+    height: 26px
+    width: 32px
+    position: relative
+    align-self: center
+    margin-right: 20px
+    z-index: 5
+    display: none
+    flex-direction: column
+    justify-content: space-between
+    cursor: pointer
+    transition: transform 0.4s ease-in-out
+    .line
+        display: block
+        height: 4px
+        width: 100%
+        border-radius: 10px
+        background-color: #0e2431
+    
+
+.line1
+    transform-origin: 0% 0%
+    transition: transform 0.4s ease-in-out
+
+.line2
+    transition: transform 0.2s ease-in-out
+
+.line3
+    transform-origin: 0% 100%
+    transition: transform 0.4s ease-in-out
+
+.hamburguer-lines.active
+    transform: translateX(20%)
+
+.line1.one
+    transform: rotate(45deg)
+    
+.line2.second
+    transform: scaleY(0)
+    
+.line3.third
+    transform: rotate(-45deg)
+    
+
+@media (min-width: 768px) and (max-width: 1024px)
+  .header
+    &-title
+        width: 250px
+    &-menu
+        margin-right: 25px
+
+@media (max-width: 768px)
+    .header
+        justify-content: space-between
+        &-title
+            margin-left: 0px
+            width: 120px
+            h2
+                width: 100px
+                font-size: 2.5em
+                padding: 0px 0px 0px 20px
+        &-menu
+            position: absolute
+            z-index: 2
+            flex-direction: column
+            width: 100%
+            height: 200px
+            justify-content: center
+            margin-right: 0px
+            padding-bottom: 20px
+            transform: translate(-100%, 130px)
+            background-color: $listbg
+            li
+                padding: 10px 0 
+                border-bottom: 1px solid $textcolor
+    .hamburguer-lines
+        display: flex
+    .hamburguer-menu
+        display: flex
+
+
+        
+  
+

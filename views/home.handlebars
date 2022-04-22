@@ -1,0 +1,39 @@
+<div class="content">
+    <div class="home">
+    
+        <section class="home-front">
+            <div onmouseleave="this.style.boxShadow = 'none'" 
+            onmouseenter="this.style.boxShadow = 'inset 0 0 0 1000px #00B4D811'"
+            class="home-image" style="background-image: url('/img/{{RecentPost.filename}}')"></div>
+            <div class="home-front-text">
+                <a class="postagem" href="/post/{{RecentPost.slug}}">
+                    <h4>{{RecentPost.title}}</h4>
+                    <p>{{RecentPost.desc}}</p>
+                </a>
+            </div>
+        </section>
+        <div class="home-posts">
+            <h4 style="margin-top: 30px" class="title-1">Artistas: </h4>
+            <div class="container">
+                {{#each posts}}
+                    <div class="home-post grid-6">
+                        <a class ='postagem' href="/post/{{slug}}">
+                            <div onmouseleave="this.style.boxShadow = 'none'" 
+                            onmouseenter="this.style.boxShadow = 'inset 0 0 0 1000px #00B4D855'" 
+                            class="home-post-image" style="background-image: url('/img/{{filename}}')"></div>
+                            <div class="home-post-text">
+                                <h3>{{title}}</h3>
+                                <p>{{desc}}</p>
+                            </div>
+                        </a>
+                    </div>
+
+                {{else}}
+                    <div class="home-post grid-4">
+                        <h3>No posts yet</h3>
+                    </div>
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

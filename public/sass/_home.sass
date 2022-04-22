@@ -1,0 +1,111 @@
+
+.home
+    &-front
+        display: flex
+        flex-direction: row
+        height: auto
+        background-color: $bodybg
+        transition: 0.5s
+        &:hover
+            background-color: $bg1
+        &-text
+            flex: 1
+            padding-top: 10%
+            h4
+                font-size: 4em
+                color: $bg2
+                text-align: center
+                transition: 0.5s
+                &:hover
+                    font-size: 5em
+            p
+                padding: 50px 100px
+                font-size: 1.5em
+                line-height: 1.7
+            
+    &-image
+        flex: 1
+        width: 100%
+        height: 729px
+        background-size: cover
+        background-position: center top
+        transition: .5s
+              
+    &-posts
+        padding-top: 20px
+    &-post
+        display: flex
+        flex-direction: column
+        height: auto
+        text-align: center
+        background: none
+        transition: 0.5s
+        &:hover
+            background-color: $bg2
+        &-image
+            width: 100%
+            height: 490px
+            background:
+                size: cover
+                repeat: no-repeat
+                position: center center
+            transition: box-shadow 0.5s ease
+        &-text
+            flex: 1
+            width: 100%
+            height: 180px
+            padding: 10px 50px
+            h3
+                font-size: 1.5em
+            p   
+                max-width: 500px
+                height: 100px
+                margin-top: 10px
+                overflow: hidden
+                white-space: normal
+                text-overflow: ellipsis
+                text-align: center
+
+
+//Responsive
+
+@media (min-width: 768px) and (max-width: 1024px)
+    .home-front-text 
+        h4:hover
+            font-size: 4em
+        p
+            padding: 20px 50px
+    .home-post-text
+        height: 220px
+        p
+            height: 150px
+
+@media (max-width: 768px)
+    .home
+        &-image
+            height: 500px
+        &-front-text 
+            h4
+                font-size: 3em
+                &:hover
+                    font-size: 3em
+            p
+                font-size: 1em
+                line-height: 1.5
+                padding: 20px 25px
+        &-post
+            background-color: $bg1
+            &-image
+                height: 300px
+            &-text
+                height: 180px
+                padding: 10px 10px
+                h3
+                    font-size: 1.25em
+                p
+                    width: 100%
+                    height: 70%
+                    font-size: 0.8em
+                    line-height: 1
+
+

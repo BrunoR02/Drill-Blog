@@ -1,0 +1,32 @@
+<div class="content">
+    <div class="container">
+        <h3 class="title-1">Lista de Posts</h3>
+        <div class="button-link grid-12">
+            <a href="/admin/posts/form"><button>Criar post</button></a>
+        </div>
+        <div class="list-posts">
+            {{#each posts}}
+                <div class="list-post grid-4">
+                    <section class="list-post-text">
+                        <a href="/post/{{slug}}"><h3>{{title}}</h3></a>
+                        <p>{{desc}}</p>
+                    </section>
+                    <section class="list-post-action">
+                        <a href="/admin/posts/edit/{{_id}}"><button>Editar</button></a>
+                        <form action="/admin/posts/delete" method="post">
+                            <input type="hidden" name="id" value="{{_id}}">
+                            <input type="hidden" name="file1" value="{{filename}}">
+                            <button class="button-delete" type="submit">Deletar</button>
+                        </form>
+                    </section>
+                </div>
+
+            {{else}}
+                <div class="home-post grid-4">
+                    <h3>No posts yet</h3>
+                </div>
+            {{/each}}
+        </div>
+
+    </div>
+</div>

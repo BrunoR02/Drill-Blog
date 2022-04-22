@@ -1,0 +1,46 @@
+<section class="header">
+    <a id='header-title' class="header-title" href="/"><h2>Drill</h2></a>
+    <section id="radio-container">
+        <audio id="radio" preload="metadata">
+            <source id="radio-source" src="" >
+        </audio>
+        <div class="song-name">
+            <h5 id='song-name'>Nome</h5>
+        </div>
+        <div>
+            <button id="radio-play"></button>
+            <!--<span id="current-time">0:00</span>
+            <input type="range" id="seek-slider" max="100" value="0">
+            <span id="duration">0:00</span>
+            -->
+            
+            <button id='radio-next'></button>
+        </div>
+        <div id="volume">
+            <button id="mute-button"></button>
+            <input type="range" id="volume-slider" max="100" value="40">
+        </div>
+    </section>
+    <section class="hamburguer-menu">
+        <div class="hamburguer-lines">
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+            <span class="line line3"></span>
+        </div>
+    </section>
+
+    <ul class="header-menu" >
+        <a id="menu-home-link" href="/"><li>Home</li></a>
+        {{#if user.adminTrue}}
+            <a id="posts-link" href="/admin/posts"><li>Posts</li></a>
+        {{/if}}
+        {{#if user}}
+            <a href="/logout"><li>Deslogar</li></a>
+        {{else}}
+            <a id="login-link" href="/login"><li>Login</li></a>
+            <a id="register-link" href="/register"><li>Cadastro</li></a>
+        {{/if}}
+    </ul>
+</section>
+
+<!-- cortar-->

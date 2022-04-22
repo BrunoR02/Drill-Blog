@@ -1,0 +1,225 @@
+@keyframes slide
+    from
+        width: 0px
+        visibility: hidden
+    to
+        width: 60%
+        visibility: visible
+
+
+@keyframes slideBack
+    from
+        width: 60%
+        visibility: visible
+    to
+        width: 0px
+        visibility: hidden
+
+#radio-container
+    display: flex
+    align-self: center
+    height: 100%
+    width: 25%
+    justify-content: flex-end
+    flex-direction: column
+    align-items: center
+    transition: 0.5s ease
+    &:hover
+        background-color: $bg1
+    div
+        display: flex
+        justify-content: center
+        align-items: center
+
+
+#radio
+    align-self: center
+    button
+        width: 200px
+        height: 200px   
+    &-play
+        height: 50px
+        border: none
+        border-radius: 0
+        transition: background-image 0.1s ease
+        background:
+            color: transparent
+            image: url('/img/icons/botao-play.png')
+            position: center
+            size: 80%
+            repeat: no-repeat
+    &-next
+        height: 50px
+        border: none
+        border-radius: 0
+        transition: background-image 0.1s ease
+        background:
+            color: transparent
+            image: url('/img/icons/botao-next.png')
+            position: center
+            size: 80%
+            repeat: no-repeat
+
+#seek-slider
+    display: none
+    position: relative
+    width: 40%
+    margin: 0
+    padding: 0
+    height: 19px
+    outline: none
+    &::-webkit-slider-runnable-track
+        width: 100%
+        height: 3px
+        cursor: pointer
+        background: linear-gradient(to right, rgba(0, 125, 181, 0.6) var(--buffered-width), rgba(0, 125, 181, 0.2) var(--buffered-width))
+
+    &::before
+        position: absolute
+        content: ""
+        top: 8px
+        left: 0
+        width: var(--seek-before-width)
+        height: 3px
+        background-color: transparent
+        cursor: pointer
+    
+    &::-webkit-slider-thumb
+        position: relative
+        -webkit-appearence: none
+        box-sizing: content-box
+        border: 1px solid #007db5
+        height: 15px
+        width: 15px
+        border-radius: 50%
+        background-color: white
+        cursor: pointer
+        margin: -7px 0 0 0
+    &:active::-webkit-slider-thumb //Quando clica para mudar o tempo da musica
+        transform: scale(1.2)
+        background: #007db5
+    &::-moz-range-track
+        width: 100%
+        height: 3px
+        cursor: pointer
+        background: linear-gradient(to right, rgba(0, 125, 181, 0.6) var(--buffered-width), rgba(0, 125, 181, 0.2) var(--buffered-width))
+    &::-moz-range-progress
+        background-color: #007db5
+    &::-moz-focus-outer
+        border: 0
+    &::-moz-range-thumb
+        box-sizing: content-box
+        border: 1px solid #007db5
+        height: 15px
+        width: 15px
+        border-radius: 50%
+        background-color: #fff
+        cursor: pointer
+    &:active::-moz-range-thumb
+        transform: scale(1.2)
+        background: #007db5
+    &::-ms-track
+        width: 100%
+        height: 3px
+        cursor: pointer
+        background: transparent
+        border: solid transparent
+        color: transparent
+    &::-ms-fill-lower
+        background-color: #007db5
+    &::-ms-fill-upper
+        background: linear-gradient(to right, rgba(0, 125, 181, 0.6) var(--buffered-width), rgba(0, 125, 181, 0.2) var(--buffered-width))
+    &::-ms-thumb
+        box-sizing: content-box
+        border: 1px solid #007db5
+        height: 15px
+        width: 15px
+        border-radius: 50%
+        background-color: white
+        cursor: pointer
+    &:active::-ms-thumb
+        transform: scale(1.2)
+        background: #007db5
+
+#volume
+    height: 50px
+    transition: 0.5s
+    position: relative
+    border: 5px solid $bg1
+    border-radius: 50px
+    &:hover
+        input
+            visibility: visible
+            animation-duration: 0.3s
+            animation-timing-function: linear
+            animation-fill-mode: forwards
+            animation-direction: alternate
+    &-slider
+        width: 0%
+        visibility: hidden
+        animation-duration: 0.3s
+        animation-timing-function: linear
+        animation-fill-mode: forwards
+        animation-direction: alternate
+
+
+#mute-button
+    height: 50px
+    border: none
+    border-radius: 0
+    transition: background-image 0.2s ease
+    background:
+        color: transparent
+        image: url('/img/icons/volume.png')
+        position: center
+        size: 100%
+        repeat: no-repeat
+        
+
+#song-name
+   font-size: 1em
+   text-align: center
+   color: $textcolor
+   transition: 1s
+
+@keyframes outdoorName
+    0%
+        transform: translateX(100%)
+    100%
+        transform: translateX(-125%)
+
+@media (max-width: 1024px)
+    .song-name
+        align-self: center
+        height: 30px
+        overflow: hidden
+        width: 100%
+        #song-name
+            position: relative
+            top: 5px
+            height: 25px
+            width: 200px
+            white-space: nowrap
+            text-align: center
+            will-change: transform
+            animation-name: outdoorName
+            animation-delay: 200ms
+            animation-duration: 8s
+            animation-timing-function: steps(1000)
+            animation-iteration-count: infinite
+
+@media (max-width: 768px)
+    #radio-container
+        width: 25%
+        &:hover
+            background-color: transparent
+    #volume
+        border: none
+        width: 150px
+        visibility: visible
+        &:hover
+            animation-name: a
+        &-slider
+            visibility: visible
+            width: 50%
+            animation-name: a

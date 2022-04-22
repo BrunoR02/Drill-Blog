@@ -1,0 +1,27 @@
+<div class="content">
+    <div class="container">
+        {{#if errors}}
+            <div class="alert alert-success grid-12">{{errors.texto}}
+                <button class="alert-close" onclick="this.parentElement.style.display = 'none'"></button>
+            </div>
+
+        {{else}}
+        {{/if}}
+    </div>
+    <h3 class="title-1">Criar Post:</h3>
+    <form class="form" action="/admin/posts/sent" method="post" enctype="multipart/form-data" >
+
+        <label for="title">Titulo: <em>*</em></label>
+        <input type="text" name="title" id="title" required>
+        <label for="slug">Slug: <em>*</em></label>
+        <input type="text" name="slug" id="slug" required>
+        <label for="file">Thumb: <em>*</em></label>
+        <input type="file" name="file" id="file" required>
+        <label for="desc">Descrição: <small>(200 max)</small> <em>*</em></label>
+        <textarea name="desc" id="desc" required></textarea>
+        <label for="content">Conteúdo: <small>(50 min)</small><em>*</em></label>
+        <textarea name="content" id="content" required></textarea>
+
+        <button class="form-button" type="submit">Enviar</button>
+    </form>
+</div>

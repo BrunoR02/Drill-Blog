@@ -1,0 +1,21 @@
+<div class="content">
+    <div class="container">
+        {{#if error}}
+            <div class="alert alert-error grid-12">{{error}}
+                <button class="alert-close" onclick="this.parentElement.style.display = 'none'"></button>
+            </div>
+        {{else}}
+    </div>
+
+    {{/if}}
+
+    <h3 class="title-1">Login:</h3>
+    <form id="login-post" class="form" action="/login" method="post">
+        <label for="email">Email: </label>
+        <input type="email" name="email" id="email" required>
+        <label for="password">Senha: </label>
+        <input type="password" name="password" id="password" required>
+
+        <button class="form-button" type="submit">Logar</button>
+    </form>
+</div>

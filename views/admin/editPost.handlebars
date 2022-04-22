@@ -1,0 +1,28 @@
+<div class="content">
+    <div class="container">
+        {{#if errors}}
+            <div class="alert alert-success grid-12">{{errors.texto}}
+                <button class="alert-close" onclick="this.parentElement.style.display = 'none'"></button>
+            </div>
+
+        {{else}}
+        {{/if}}
+    </div>
+    <h3 class="title-1">Editar Post:</h3>
+    <form class="form" action="/admin/posts/edit" method="post" enctype="multipart/form-data" >
+        <input type="hidden" name="id" value="{{post._id}}">
+        <label for="title">Titulo:</label>
+        <input type="text" name="title" id="title" value="{{post.title}}" required>
+        <label for="slug">Slug: </label>
+        <input type="text" name="slug" id="slug" value="{{post.slug}}" required>
+        <label for="file">Thumb: </label>
+        <div class="form-image" style="background-image: url('/img/{{post.filename}}')"></div>
+        <input type="file" name="file" id="file">
+        <label for="desc">Descrição: <small>(200 max)</small></label>
+        <textarea name="desc" id="desc" required>{{post.desc}}</textarea>
+        <label for="content">Conteúdo: <small>(50 min)</small></label>
+        <textarea name="content" id="content" required>{{post.content}}</textarea>
+
+        <button id="form-button" type="submit">Enviar</button>
+    </form>
+</div>
