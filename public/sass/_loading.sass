@@ -1,0 +1,27 @@
+#loading-spinner
+  position: fixed
+  z-index: 3
+  top: 50%
+  left: 50%
+  &::after
+      position: absolute
+      content: ""
+      top: 0
+      left: 0
+      margin-top: -60px
+      margin-left: -70px
+      width: 120px
+      height: 120px
+      border: 10px solid transparent
+      border-radius: 50%
+      border-top-color: black
+      animation: loading 1s linear infinite
+  display: none
+
+.loading-active
+  display: block !important
+
+    
+@keyframes loading
+    to
+        transform: rotate(1turn)

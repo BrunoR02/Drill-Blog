@@ -1,13 +1,11 @@
 <div class="content">
-    <div class="container">
-        {{#if errors}}
-            <div class="alert alert-success grid-12">{{errors.texto}}
-                <button class="alert-close" onclick="this.parentElement.style.display = 'none'"></button>
-            </div>
+    {{#if errors}}
+        <div class="alert alert-success">{{errors.texto}}
+            <button class="alert-close" onclick="this.parentElement.style.display = 'none'"></button>
+        </div>
 
-        {{else}}
-        {{/if}}
-    </div>
+    {{else}}
+    {{/if}}
     <h3 class="title-1">Editar Post:</h3>
     <form class="form" action="/admin/posts/edit" method="post" enctype="multipart/form-data" >
         <input type="hidden" name="id" value="{{post._id}}">

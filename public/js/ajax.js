@@ -7,11 +7,15 @@
     const loginLink = doc.getElementById('login-link')
     const registerLink = doc.getElementById('register-link')
     const menuHomeLink = doc.getElementById('menu-home-link')
+    const menuSobreLink = doc.getElementById("menu-sobre-link")
     const homeLink = doc.getElementById('header-title')
     const postsLink = doc.getElementById('posts-link')
     const postagensLink = doc.getElementsByClassName('postagem')
+    const loadingSpinner = doc.getElementById('loading-spinner')
 
     const content = doc.querySelector('.content')
+
+    const urlMain = 'https://drill-blog.herokuapp.com' // "http://localhost:8081" || 'https://drill-blog.herokuapp.com'
     
     let clicado = false
 
@@ -23,11 +27,12 @@
                 
                 let ajax = new XMLHttpRequest()
                 let link = item.href
-                let route = link.replace('https://drill-blog.herokuapp.com', '')
+                let route = link.replace(`${urlMain}`, '')
 
                 ajax.open('GET', link)
                 ajax.onreadystatechange = ()=>{
-                    if(ajax.status === 200 && ajax.readyState ===4){
+                    if(ajax.readyState ===4){
+                        loadingSpinner.classList.remove("loading-active")
                         let cortar = ajax.responseText.split('cortar-->')
                         history.pushState(null,null, route)
                         sessionStorage['oldURL'] = link
@@ -50,8 +55,7 @@
                     }
                 }  
                 ajax.send()
-                
-            
+                loadingSpinner.classList.add("loading-active")
             })
         }
     }
@@ -64,14 +68,18 @@
                 e.preventDefault()
                 let ajax = new XMLHttpRequest()
                 let link = location.href + "/sent"
-                let route = location.href.replace("https://drill-blog.herokuapp.com","")
+                let route = location.href.replace(`${urlMain}`,"")
                 let comentario = doc.getElementById('comment-text').value
                 
                 ajax.open('POST', link)
                 ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
                 ajax.send(`texto=${comentario}`)
+
+                loadingSpinner.classList.add("loading-active")
+
                 ajax.onreadystatechange = ()=>{
-                    if(ajax.status === 200 && ajax.readyState ===4){
+                    if(ajax.readyState ===4){
+                        loadingSpinner.classList.remove("loading-active")
                         let cortar = ajax.responseText.split('cortar-->')
                         history.pushState(null,null, route)
                         sessionStorage['oldURL'] = location.href
@@ -83,6 +91,7 @@
                         DeleteRefresh()
                     }
                 }   
+                
             })
         }
     }
@@ -97,14 +106,24 @@
                 let emailAddress = doc.getElementById('email').value
                 let passwordAddress = doc.getElementById('password').value
                 let passwordAddress2 = doc.getElementById('password2').value
+
+                let isValid = validation(name,emailAddress,passwordAddress,passwordAddress2)
     
-                ajax.open('POST', 'https://drill-blog.herokuapp.com/register')
+                ajax.open('POST', `${urlMain}/register`)
                 ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
                 ajax.send(`name=${name}&email=${emailAddress}&password=${passwordAddress}&password2=${passwordAddress2}`)
+
+                loadingSpinner.classList.add("loading-active")
+
                 ajax.onreadystatechange = ()=>{
-                    if(ajax.status === 200 && ajax.readyState ===4){
+                    if(ajax.readyState ===4){
+                        loadingSpinner.classList.remove("loading-active")
                         let cortar = ajax.responseText.split('cortar-->')
-                        history.pushState(null,null, "/")
+                        if(isValid){
+                            history.pushState(null,null, "/register")
+                        } else {
+                            history.pushState(null,null, "/")
+                        }
                         sessionStorage['oldURL'] = location.href
                         content.innerHTML = cortar[1]
                         PostRefresh()
@@ -123,14 +142,17 @@
                     e.preventDefault()
                     let ajax = new XMLHttpRequest()
                     let commentID = item.children[0].value
-                    let route = location.href.replace("https://drill-blog.herokuapp.com","")
-                    console.log(commentID)
+                    let route = location.href.replace(`${urlMain}`,"")
         
-                    ajax.open('POST', 'https://drill-blog.herokuapp.com/post/comment/delete')
+                    ajax.open('POST', `${urlMain}/post/comment/delete`)
                     ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
                     ajax.send(`id=${commentID}`)
+
+                    loadingSpinner.classList.add("loading-active")
+
                     ajax.onreadystatechange = ()=>{
-                        if(ajax.status === 200 && ajax.readyState ===4){
+                        if(ajax.readyState ===4){
+                            loadingSpinner.classList.remove("loading-active")
                             let cortar = ajax.responseText.split('cortar-->')
                             history.pushState(null,null, route)
                             sessionStorage['oldURL'] = location.href
@@ -158,84 +180,121 @@
         }
     }
 
+    function handleMenu(){
+        let menu = doc.querySelector('.header-menu')
+        menu.style.transform = 'translate(-100%, 130px)'
+        doc.querySelector('.hamburguer-lines').classList.remove('active')
+        doc.querySelector('.line1').classList.remove('one')
+        doc.querySelector('.line2').classList.remove('second')
+        doc.querySelector('.line3').classList.remove('third')
+        clicado = false
+    }
+
     doc.addEventListener('DOMContentLoaded', ()=>{PostRefresh(); ListRefresh();})
 
     homeLink.addEventListener('click', (e)=>{
         e.preventDefault()
         let ajax = new XMLHttpRequest()
         
-        ajax.open('GET', 'https://drill-blog.herokuapp.com/')
+        if(location.href === `${urlMain}/`){ //Evitar request desnecessário
+            return null
+        }
+
+        ajax.open('GET', `${urlMain}/`)
         ajax.onreadystatechange = ()=>{
-            if(ajax.status === 200 && ajax.readyState ===4){
+            if(ajax.readyState ===4){
+                loadingSpinner.classList.remove("loading-active")
                 let cortar = ajax.responseText.split('cortar-->')
                 history.pushState(null,null, '/')
                 sessionStorage['oldURL'] = location.href
                 content.innerHTML = cortar[1]
                 PostRefresh()
                 if(screen.width < 768){
-                    let menu = doc.querySelector('.header-menu')
-                    menu.style.transform = 'translate(-100%, 130px)'
-                    doc.querySelector('.hamburguer-lines').classList.remove('active')
-                    doc.querySelector('.line1').classList.remove('one')
-                    doc.querySelector('.line2').classList.remove('second')
-                    doc.querySelector('.line3').classList.remove('third')
-                    clicado = false
+                    handleMenu()
                 }
             }
         }   
         ajax.send()
+        loadingSpinner.classList.add("loading-active")
     })  
 
     menuHomeLink.addEventListener('click', (e)=>{
         e.preventDefault()
         let ajax = new XMLHttpRequest()
         
-        ajax.open('GET', 'https://drill-blog.herokuapp.com/')
+        if(location.href === `${urlMain}/`){ //Evitar request desnecessário
+            return null
+        }
+
+        ajax.open('GET', `${urlMain}/`)
         ajax.onreadystatechange = ()=>{
-            if(ajax.status === 200 && ajax.readyState ===4){
+            if(ajax.readyState ===4){
+                loadingSpinner.classList.remove("loading-active")
                 let cortar = ajax.responseText.split('cortar-->')
                 history.pushState(null,null, '/')
                 sessionStorage['oldURL'] = location.href
                 content.innerHTML = cortar[1]
                 PostRefresh()
                 if(screen.width < 768){
-                    let menu = doc.querySelector('.header-menu')
-                    menu.style.transform = 'translate(-100%, 130px)'
-                    doc.querySelector('.hamburguer-lines').classList.remove('active')
-                    doc.querySelector('.line1').classList.remove('one')
-                    doc.querySelector('.line2').classList.remove('second')
-                    doc.querySelector('.line3').classList.remove('third')
-                    clicado = false
+                    handleMenu()
                 }
             }
         }   
         ajax.send()
+        loadingSpinner.classList.add("loading-active")
+    }) 
+
+    menuSobreLink.addEventListener('click', (e)=>{
+        e.preventDefault()
+        let ajax = new XMLHttpRequest()
+        
+        if(location.href === `${urlMain}/sobre`){ //Evitar request desnecessário
+            return null
+        }
+
+        ajax.open('GET', `${urlMain}/sobre`)
+        ajax.onreadystatechange = ()=>{
+            if(ajax.readyState ===4){
+                loadingSpinner.classList.remove("loading-active")
+                let cortar = ajax.responseText.split('cortar-->')
+                history.pushState(null,null, '/sobre')
+                sessionStorage['oldURL'] = location.href
+                content.innerHTML = cortar[1]
+                PostRefresh()
+                if(screen.width < 768){
+                    handleMenu()
+                }
+            }
+        }   
+        ajax.send()
+        loadingSpinner.classList.add("loading-active")
     }) 
 
     if(loginLink != null){
         loginLink.addEventListener('click', (e)=>{
             e.preventDefault()
             let ajax = new XMLHttpRequest()
+
+            if(location.href === `${urlMain}/login`){ //Evitar request desnecessário
+                return null
+            }
             
-            ajax.open('GET', 'https://drill-blog.herokuapp.com/login')
+            ajax.open('GET', `${urlMain}/login`)
             ajax.onreadystatechange = ()=>{
-                if(ajax.status === 200 && ajax.readyState ===4){
+                if(ajax.readyState ===4){
+                    loadingSpinner.classList.remove("loading-active")
                     let cortar = ajax.responseText.split('cortar-->')
                     history.pushState(null,'Login', '/login')
                     sessionStorage['oldURL'] = location.href
                     content.innerHTML = cortar[1]
+                    RegisterRefresh()
                     if(screen.width < 768){
-                        let menu = doc.querySelector('.header-menu')
-                        menu.style.transform = 'translate(-100%, 130px)'
-                        doc.querySelector('.hamburguer-lines').classList.remove('active')
-                        doc.querySelector('.line1').classList.remove('one')
-                        doc.querySelector('.line2').classList.remove('second')
-                        doc.querySelector('.line3').classList.remove('third')
-                        clicado = false
+                        handleMenu()
                     }
                 }
             }   
             ajax.send()
+            loadingSpinner.classList.add("loading-active")
         })  
     }
 
@@ -245,27 +304,27 @@
         registerLink.addEventListener('click', (e)=>{
             e.preventDefault()
             let ajax = new XMLHttpRequest()
+
+            if(location.href === `${urlMain}/register`){ //Evitar request desnecessário
+                return null
+            }
             
-            ajax.open('GET', 'https://drill-blog.herokuapp.com/register')
+            ajax.open('GET', `${urlMain}/register`)
             ajax.onreadystatechange = ()=>{
-                if(ajax.status === 200 && ajax.readyState ===4){
+                if(ajax.readyState ===4){
+                    loadingSpinner.classList.remove("loading-active")
                     let cortar = ajax.responseText.split('cortar-->')
                     history.pushState(null,null, '/register')
                     sessionStorage['oldURL'] = location.href
                     content.innerHTML = cortar[1]
                     RegisterRefresh()
                     if(screen.width < 768){
-                        let menu = doc.querySelector('.header-menu')
-                        menu.style.transform = 'translate(-100%, 130px)'
-                        doc.querySelector('.hamburguer-lines').classList.remove('active')
-                        doc.querySelector('.line1').classList.remove('one')
-                        doc.querySelector('.line2').classList.remove('second')
-                        doc.querySelector('.line3').classList.remove('third')
-                        clicado = false
+                        handleMenu()
                     }
                 }
             }   
             ajax.send()
+            loadingSpinner.classList.add("loading-active")
         })  
     }
 
@@ -273,27 +332,27 @@
         postsLink.addEventListener('click', (e)=>{
             e.preventDefault()
             let ajax = new XMLHttpRequest()
+
+            if(location.href === `${urlMain}/admin/posts`){ //Evitar request desnecessário
+                return null
+            }
             
-            ajax.open('GET', 'https://drill-blog.herokuapp.com/admin/posts')
+            ajax.open('GET', `${urlMain}/admin/posts`)
             ajax.onreadystatechange = ()=>{
-                if(ajax.status === 200 && ajax.readyState ===4){
+                if(ajax.readyState ===4){
+                    loadingSpinner.classList.remove("loading-active")
                     let cortar = ajax.responseText.split('cortar-->')
                     history.pushState(null,null, '/admin/posts')
                     sessionStorage['oldURL'] = location.href
                     content.innerHTML = cortar[1]
                     if(screen.width < 768){
-                        let menu = doc.querySelector('.header-menu')
-                        menu.style.transform = 'translate(-100%, 130px)'
-                        doc.querySelector('.hamburguer-lines').classList.remove('active')
-                        doc.querySelector('.line1').classList.remove('one')
-                        doc.querySelector('.line2').classList.remove('second')
-                        doc.querySelector('.line3').classList.remove('third')
-                        clicado = false
+                        handleMenu()
                     }
                     ListRefresh()
                 }
             }   
             ajax.send()
+            loadingSpinner.classList.add("loading-active")
         })  
     }
 
@@ -301,11 +360,12 @@
     //History Back
     window.addEventListener('popstate',()=>{
         let ajax = new XMLHttpRequest()
-        let route = location.href.replace('https://drill-blog.herokuapp.com', "")
+        let route = location.href.replace(`${urlMain}`, "")
             
         ajax.open('GET', location.href)
         ajax.onreadystatechange = ()=>{
-            if(ajax.status === 200 && ajax.readyState ===4){
+            if(ajax.readyState ===4){
+                loadingSpinner.classList.remove("loading-active")
                 let cortar = ajax.responseText.split('cortar-->')
                 history.replaceState(null,null, route)
                 sessionStorage['oldURL'] = location.href
@@ -323,18 +383,12 @@
                 }
                 PostRefresh()
                 if(screen.width < 768){
-                    let menu = doc.querySelector('.header-menu')
-                    menu.style.transform = 'translate(-100%, 130px)'
-                    doc.querySelector('.hamburguer-lines').classList.remove('active')
-                    doc.querySelector('.line1').classList.remove('one')
-                    doc.querySelector('.line2').classList.remove('second')
-                    doc.querySelector('.line3').classList.remove('third')
-                    clicado = false
+                    handleMenu()
                 }
-                
             }
         }   
         ajax.send()
+        loadingSpinner.classList.add("loading-active")
     })
     
     
@@ -357,9 +411,30 @@
             document.querySelector('.line3').classList.remove('third')
             clicado = false
         }
-        
     })
+
+    //Validaçao do Register
     
+    function validation(name,email,password,password2){
+        if(!name || typeof name == undefined || name == null){
+            return false
+        } else if(name.length < 3){
+            return false
+        }
+        if(!email || typeof email == undefined || email == null){
+            return false
+        } else if(email.length < 5){
+            return false
+        }
+        if(!password || typeof password == undefined || password == null){
+            return false
+        } else if(password.length < 5){
+            return false
+        } else if(password != password2){
+            return false
+        }
+        return true
+    }
     
     
 })(window,document)

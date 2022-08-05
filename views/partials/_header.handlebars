@@ -31,6 +31,7 @@
 
     <ul class="header-menu" >
         <a id="menu-home-link" href="/"><li>Home</li></a>
+        <a id="menu-sobre-link" href="/sobre"><li>Sobre</li></a>
         {{#if user.adminTrue}}
             <a id="posts-link" href="/admin/posts"><li>Posts</li></a>
         {{/if}}
@@ -41,6 +42,8 @@
             <a id="register-link" href="/register"><li>Cadastro</li></a>
         {{/if}}
     </ul>
+    
+    <div id="loading-spinner"></div>
 </section>
 
 <!-- cortar-->

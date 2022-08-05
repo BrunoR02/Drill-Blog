@@ -1,12 +1,10 @@
 <div class="content">
-    <div class="container">
-        {{#if errors}}
-            <div class="alert alert-error grid-12">{{errors.texto}}
-                <button class="alert-close" onclick="this.parentElement.style.display = 'none'"></button>
-            </div>
-        {{else}}
-        {{/if}}
-    </div>
+    {{#if errors}}
+        <div class="alert alert-error">{{errors.texto}}
+            <button class="alert-close" onclick="this.parentElement.style.display = 'none'"></button>
+        </div>
+    {{else}}
+    {{/if}}
     <h3 class="title-1">Cadastre-se:</h3>
     <form id="register-post" class="form" action="/register" method="post">
         <label for="name">Nome: <em>*</em></label>

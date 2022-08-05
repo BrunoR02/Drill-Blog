@@ -1,14 +1,12 @@
-<div class="container">
-    {{#if success_msg}}
-        <div class="alert alert-success grid-12">{{success_msg}}
-            <button class="alert-close" onclick="this.parentElement.style.display = 'none'"></button>
-        </div>
-    {{else}}
-    {{/if}}
-    {{#if error_msg}}
-        <div class="alert alert-error grid-12">{{error_msg}}
-            <button class="alert-close" onclick="this.parentElement.style.display = 'none'"></button>
-        </div>
-    {{else}}
-    {{/if}}
-</div>
+{{#if success_msg}}
+    <div class="alert alert-success">{{success_msg}}
+        <button class="alert-close" onclick="this.parentElement.style.display = 'none'"></button>
+    </div>
+{{else}}
+{{/if}}
+{{#if error_msg}}
+    <div class="alert alert-error">{{error_msg}}
+        <button class="alert-close" onclick="this.parentElement.style.display = 'none'"></button>
+    </div>
+{{else}}
+{{/if}}

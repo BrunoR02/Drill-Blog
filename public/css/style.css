@@ -223,7 +223,7 @@ div, a, li, ul, section, h1, h2, h3, h4, h5, h6, header, footer, menu, body, htm
   transition: 0.7s ease;
 }
 .header-menu li {
-  padding: 0px 20px 0px 10px;
+  padding: 0px 10px;
   color: #03045E;
   font-size: 1.25em;
   font-weight: bold;
@@ -326,11 +326,12 @@ div, a, li, ul, section, h1, h2, h3, h4, h5, h6, header, footer, menu, body, htm
     justify-content: center;
     margin-right: 0px;
     padding-bottom: 20px;
+    padding-top: 20px;
     transform: translate(-100%, 130px);
     background-color: #48CAE4;
   }
   .header-menu li {
-    padding: 10px 0;
+    padding: 5px 0;
     border-bottom: 1px solid #03045E;
   }
 
@@ -997,7 +998,7 @@ button:hover {
     font-size: 0.8em;
   }
   .comment-content {
-    font-size: 0.6em;
+    font-size: 0.8em;
   }
   .comment-delete button {
     margin-left: -50px;
@@ -1075,6 +1076,79 @@ button:hover {
   padding-right: 20px;
 }
 
+.sobre {
+  width: 60%;
+  margin: 50px auto;
+  color: #03045E;
+  font-weight: 700;
+  line-height: 2;
+  text-shadow: 1px 1px white;
+}
+.sobre span {
+  color: #0077B6;
+  font-size: 1.25em;
+  font-weight: bold;
+}
+.sobre-credits {
+  padding: 20px 0;
+  font-size: 1.2em;
+  color: black;
+  text-shadow: 1px 1px white;
+}
+.sobre a {
+  color: #00B4D8;
+  font-size: 1.3em;
+}
+.sobre h5 {
+  font-family: Verdana;
+  font-style: italic;
+  font-size: 1em;
+  color: #03045E;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .sobre {
+    width: 80%;
+  }
+}
+@media (max-width: 768px) {
+  .sobre {
+    width: 90%;
+    font-size: 0.8em;
+    line-height: 1.7;
+  }
+}
+#loading-spinner {
+  position: fixed;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  display: none;
+}
+#loading-spinner::after {
+  position: absolute;
+  content: "";
+  top: 0;
+  left: 0;
+  margin-top: -60px;
+  margin-left: -70px;
+  width: 120px;
+  height: 120px;
+  border: 10px solid transparent;
+  border-radius: 50%;
+  border-top-color: black;
+  animation: loading 1s linear infinite;
+}
+
+.loading-active {
+  display: block !important;
+}
+
+@keyframes loading {
+  to {
+    transform: rotate(1turn);
+  }
+}
 @keyframes rotateTitle {
   0% {
     transform: rotate(0deg);
@@ -1151,6 +1225,10 @@ em {
 
 .alert {
   position: absolute;
+  top: 120px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60%;
   z-index: 1;
   margin-top: 10px;
   padding: 15px;

@@ -1,0 +1,35 @@
+.sobre
+    width: 60%
+    margin: 50px auto
+    color: $textcolor
+    font-weight: 700
+    line-height: 2
+    text-shadow: 1px 1px white
+    span
+        color: $headerbg
+        font-size: 1.25em
+        font-weight: bold  
+    &-credits
+        padding: 20px 0
+        font-size: 1.2em
+        color: black
+        text-shadow: 1px 1px white
+    a
+        color: $bg2
+        font-size: 1.3em
+    h5
+        font:
+            family: Verdana
+            style: italic
+            size: 1em
+        color: $textcolor
+
+@media (min-width: 768px) and (max-width: 1024px)
+    .sobre
+        width: 80%
+
+@media (max-width: 768px)
+    .sobre
+        width: 90%
+        font-size: 0.8em
+        line-height: 1.7
