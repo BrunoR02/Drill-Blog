@@ -16,7 +16,7 @@
 
 •	Solução Criativa ao implementar requisições AJAX (XMLHttpRequest) no Node Js juntando um sistema de rádio criado do zero (usando técnicas de Javascript avançado) e atualizando apenas partes da aplicação, com o objetivo de manter o usuário escutando a música mesmo ao navegar pelas páginas do site (Tais feitas nos serviços de streaming como Spotify, Apple Music e Soundcloud) criando uma boa experiência e imersão ao estilo musical. 
 
-•	Sistema de autenticação (Com criptografia CryptoJS) e de comentários usando MongoDB, de forma em que o usuário possa interagir e se conectar com as pessoas que apreciam o estilo, permitindo-o se expressar.
+•	Desenvolvi um sistema de autenticação com criptografia e de comentários usando MongoDB, de forma em que o usuário possa interagir e se conectar com as pessoas que apreciam o estilo, permitindo-o se expressar.
 
 ## Como rodar e iniciar o projeto:
 
